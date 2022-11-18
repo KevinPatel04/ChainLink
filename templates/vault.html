@@ -1,0 +1,74 @@
+{% extends "template.html" %}
+{% block style %}
+    <link href="{{ url_for('static', filename='css/trade.css') }}" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cdn.datatables.net/responsive/1.0.2/css/dataTables.responsive.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+{% endblock %}
+{% block main %}
+<div class="container-fuild my-5">
+    <div class="container my-5 py-5">
+        <h3 class="d-flex justify-content-center">Colleteral Vault Balance: <span id="vault-balance">0.00000</span>&nbsp;<strong>USDC</strong></h3>
+    </div>
+</div>
+<div class="container-fuild mx-5 my-5 pb-5 mb-5">
+    <div class="container pb-5 mb-5" style="width: 20rem;" >
+        <div class="wrapper">
+            <div class="tabs-wrap">
+                <ul class="ps-0">
+                    <li class="tab tab-deposit tab-buy tab-on">
+                        Deposit
+                    </li>
+                    <li class="tab tab-withdraw tab-sell">
+                        Withdraw
+                    </li>
+                </ul>
+            </div>
+            <div class="content justify-content-start">
+                <div class="mb-3 mx-2">
+                    <div class="form-group">
+                        <label>Amount <span class="text-bold" id="token">USDC</span></label>
+                        <input class="form-control only-amount" type="number" name="amount" id="amount" placeholder="0.00" required>
+                    </div>
+                    <input type="hidden" value="deposit" id="type" name="type">
+                </div>
+                <div class="order-btn d-flex flex-row-reverse">
+                    <button class="btn vault-btn bg-green text-light" id="depositWithdrawBtn" type="button" disabled>Deposit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+  $('.tab-deposit').click(function() {
+        $(this).addClass('tab-on');
+        $('.tab-withdraw').removeClass('tab-on');
+        $('.vault-btn').html("Deposit");
+        $('#type').val('deposit');
+        $('.vault-btn').removeClass('bg-red').addClass('bg-green');
+    });
+
+    $('.tab-withdraw').click(function(){
+        $(this).addClass('tab-on');
+        $('.tab-deposit').removeClass('tab-on');
+        $('.vault-btn').html("Withdraw");
+        $('#type').val('withdraw');
+        $('.vault-btn').removeClass('bg-green').addClass('bg-red');
+    });
+
+    $('#amount').on('input change', function(){
+        var val = $(this).val();
+        if(val != "") {
+            $('.vault-btn').attr('disabled',false);
+        } else {
+            $('.vault-btn').attr('disabled',true);
+        }
+    });
+
+    $('#depositWithdrawBtn').on('click', function(){
+        depositWithdraw();
+    });
+</script>
+{% endblock %}

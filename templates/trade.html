@@ -1,0 +1,555 @@
+{% extends "template.html" %}
+{% block style %}
+    <link href="{{ url_for('static', filename='css/trade.css') }}" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cdn.datatables.net/responsive/1.0.2/css/dataTables.responsive.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+{% endblock %}
+{% block main %}
+<div class="container-fuild row py-2 border-secondary border-bottom backgroud-dark sticky-top">
+    <div class="col-md-2 col-12 px-2 ps-3 border-secondary border-end my-auto">
+        <select class="custom-select icon-menu" id="countries">
+            <option value="US" data-src="{{ url_for('static', filename='img/flags/us.svg') }}">United States</option>
+            <!-- <option value="UK" data-src="{{ url_for('static', filename='img/flags/uk.svg') }}">United Kingdom</option> -->
+        </select>
+    </div>
+    <div class="col-md-2 col-6 m-auto ps-2 d-flex flex-column align-items-center">
+        <div class="indicator-value drop pe-1"><strong>100,000,000</strong></div>
+        <div class="indicator-label my-auto text-wrap">Quote Liquidity</div>
+    </div>
+    <div class="col-md-2 col-6 m-auto ps-2 d-flex flex-column align-items-center">
+        <div class="indicator-value rise pe-1"><strong>100,000,000</strong></div>
+        <div class="indicator-label my-auto text-wrap">Base Liquidity</div>
+    </div>
+    <!-- <div class="col-md-2 col-6 m-auto ps-2 d-flex flex-column align-items-center">
+        <div class="indicator-value drop pe-1"><strong>7.4%</strong></div>
+        <div class="indicator-label my-auto text-wrap">Mkt. Forecast</div>
+    </div> -->
+    <div class="col-md-2 col-6 m-auto d-flex flex-column align-items-center">
+        <div class="indicator-value rise pe-1"><strong>7.2%</strong></div>
+        <div class="indicator-label  my-auto text-wrap">Funding Rate</div>
+    </div>
+    <div class="col-md-2 col-6 m-auto d-flex flex-column align-items-center">
+        <div class="indicator-value drop pe-1"><strong>$1.074</strong></div>
+        <div class="indicator-label  my-auto text-wrap">Mkt. Price</div>
+    </div>
+    <div class="col-md-2 col-6 m-auto d-flex flex-column align-items-center">
+        <div class="indicator-value rise pe-1"><strong>$1.072</strong></div>
+        <div class="indicator-label my-auto text-wrap">Index Price</div>
+    </div>
+</div>
+
+<div class="container-fuild mx-5 my-3">
+    <div class="row g-5">
+        <div class="col-12 col-md-8 col-xl-9 border-secondary border-end">
+            <div class="pb-3 mb-3">
+                <div class="d-flex wrapper flex-row-reverse">
+                    <button class="toggleGraph btn btn-switch-theme text-light" id="graph-index-btn">Index Price</button>
+                    <button class="toggleGraph btn btn-switch-theme active me-1  text-light" id="graph-market-btn">Mkt. Price</button>
+                </div>
+                <div class="graph" id="graph">
+                    <div class="three-line-legend" id="three-line-legend-market"></div>
+                    <div class="three-line-legend d-none" id="three-line-legend-index"></div>
+                </div>
+            </div>
+            <div class="pt-3 border-secondary border-top">
+                <p class="my-auto fs-4 me-auto section-title mb-2">Activity</p>
+                <table id="activity-table" class="table" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>ACTION</th>
+                            <th>POSITION SIZE</th>
+                            <th>COLLETERAL CHANGE</th>
+                            <th>EXECUTION PRICE</th>
+                            <th>TRADE FEE</th>
+                            <th>TIMESTAMP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="badge bg-green">Buy</span></td>
+                            <td>10000.0233</td>
+                            <td>100.0</td>
+                            <td>$1.0012</td>
+                            <td>$2.30</td>
+                            <td>09/23/2022 15:00:02</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge bg-green">Buy</span></td>
+                            <td>10000.0233</td>
+                            <td>100.0</td>
+                            <td>$1.0012</td>
+                            <td>$2.30</td>
+                            <td>09/23/2022 15:00:02</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge bg-green">Buy</span></td>
+                            <td>10000.0233</td>
+                            <td>100.0</td>
+                            <td>$1.02</td>
+                            <td>$2.30</td>
+                            <td>09/23/2022 15:00:02</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge bg-green">Buy</span></td>
+                            <td>10000.0233</td>
+                            <td>100.0</td>
+                            <td>$1.0012</td>
+                            <td>$2.30</td>
+                            <td>09/23/2022 15:00:02</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge bg-green">Buy</span></td>
+                            <td>10000.0233</td>
+                            <td>100.0</td>
+                            <td>$1.0012</td>
+                            <td>$2.30</td>
+                            <td>09/23/2022 15:00:02</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge bg-green">Buy</span></td>
+                            <td>10000.0233</td>
+                            <td>100.0</td>
+                            <td>$1.0012</td>
+                            <td>$2.30</td>
+                            <td>09/23/2022 15:00:02</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-12 col-md-4 col-xl-3">
+            <div class="container-fuild d-flex mb-3 py-auto flex-column">
+                <p class="my-auto fs-4 me-auto section-title mb-2">Account</p>
+                <div class="fs-5">
+                    <strong>Acc Bal.</strong>:&nbsp; <span id="account-balance">0.00</span> <strong>ETH</strong>
+                </div>
+            </div>
+            <form id="transaction-form">
+                <div class="wrapper">
+                    <div class="tabs-wrap">
+                        <ul class="ps-0">
+                            <li class="tab tab-buy tab-on">
+                                Buy
+                            </li>
+                            <li class="tab tab-sell">
+                                Sell
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="content justify-content-start">
+                        <div class="mb-3 mx-2">
+                            <div class="form-group">
+                                <label>Collateral <span class="text-bold">USDC</span></label>
+                                <input class="form-control only-amount" type="number" name="collateral" id="collateral" placeholder="0.00" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Truflation Tokens</label>
+                                <input class="form-control only-amount" type="number" name="tokens" id="tokens" placeholder="0.00" required>
+                            </div>
+                            <!-- <div class="form-group">
+                                <label>Amount <span class="text-bold">USDC</span></label>
+                                <input class="form-control only-amount" type="number" name="amount" id="amount" placeholder="0.00" required>
+                            </div> -->
+                            
+                            <!-- <div class="form-group">
+                                <label>Leverage</label>
+                                <input type="range" min="0" max="10" value="5" step="0.1" class=" range blue" name="leverage" id="leverage"/>
+                            </div>
+                            <div class="d-flex flex-row g-2 align-items-center my-3">
+                                <div class="form-control range-label me-1"><span id="leverage-value">5.0</span>x</div>
+                                <div class="long-short-label-group">
+                                    <strong class="text-green long me-2 fs-5">LONG</strong>
+                                    <strong class="text-red short me-2 d-none fs-5">SHORT</strong>
+                                </div>
+                                <button type="button" class="border-secondary btn btn-outline-theme ms-auto me-1 change-leverage-btn" data-leverage=2>2x</button>
+                                <button type="button" class="btn btn-outline-theme me-1 border-secondary change-leverage-btn" data-leverage=5>5x</button>
+                                <button type="button" class="btn btn-outline-theme me-1 border-secondary change-leverage-btn" data-leverage=10>Max</button>
+                            </div> -->
+                            
+                        </div>
+                        <div class="pb-3 border-secondary border-top">
+                            <div class="my-3 d-flex">
+                                <p class="fs-4 me-auto mb-2 section-title">Summary</p>
+                                <input type="reset" name="reset" value="Clear Inputs" class="btn btn-outline-theme border-secondary text-light d-none" id="clear-btn">
+                            </div>
+                            <div class="mx-2 summary">
+                                <div class="row mb-3">
+                                    <!-- <div class="col-9 title">Execution Price</div>
+                                    <div class="col-3 price">-</div> -->
+                                    <div class="col-9 title">Price Impact</div>
+                                    <div class="col-3 price">-</div>
+                                    <div class="col-9 title">Fee</div>
+                                    <div class="col-3 price">-</div>
+                                    <div class="col-9 title">Total Cost</div>
+                                    <div class="col-3 price">-</div>
+                                </div>
+                                <div class="order-btn d-flex flex-row-reverse">
+                                    <button class="btn buy-btn" type="submit" disabled>Place Buy Order</button>
+                                    <button class="btn sell-btn d-none" type="submit" disabled>Place Sell Order</button>
+                                </div>
+                            </div>
+                        </div>      
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+<script>
+    // function leverageChangeHandler() {
+    //     var leverage = $('#leverage').val();
+    //     leverage = parseFloat(leverage).toFixed(1);
+    //     $('#leverage-value').html(leverage);
+    //     if (leverage == 0.0) {
+    //         $('.long-short-label-group').addClass('d-none');
+    //         $('#amount').val('');
+    //         $('#tokens').val('');
+    //     } else {
+    //         $('.long-short-label-group').removeClass('d-none');
+    //     }
+    // };
+
+    $(document).ready(function() {
+        $('#clear-btn').click(function(){
+            leverageChangeHandler();
+            $('#clear-btn').addClass('d-none');
+        });
+
+        $('.tab-buy').click(function() {
+            $(this).addClass('tab-on');
+            $('.tab-sell').removeClass('tab-on');
+            $('.sell-btn').addClass('d-none');
+            $('.buy-btn').removeClass('d-none');
+            $('.long').removeClass('d-none');
+            $('.short').addClass('d-none');
+        });
+
+        $('.tab-sell').click(function(){
+            $(this).addClass('tab-on');
+            $('.tab-buy').removeClass('tab-on');
+            $('.buy-btn').addClass('d-none');
+            $('.sell-btn').removeClass('d-none');
+            $('.short').removeClass('d-none');
+            $('.long').addClass('d-none');
+        });
+
+        $('#activity-table').DataTable({
+            paging: false,
+            searching: false,
+            scrollX: true,
+            scrollY: 300,
+            sorting: false,
+            scrollCollapse: true,
+            language: {
+                info: "_TOTAL_ Transactions"
+            }
+        });
+
+        $('#collateral').on("input change", function() {
+            // const leverage = $('#leverage').val();    
+            const collateral = $(this).val();
+            if (collateral!=='') {
+                $('#clear-btn').removeClass('d-none');
+            } else {
+                $('#clear-btn').addClass('d-none');
+            }
+            // const amount = collateral;
+            const tokens = collateral;
+            // $('#amount').val(amount);
+            $('#tokens').val(tokens);
+        });
+
+        $('#tokens').on("input change", function() {
+            // const leverage = $('#leverage').val();
+            const tokens = $(this).val();
+            if (tokens!=='') {
+                $('#clear-btn').removeClass('d-none');
+            } else {
+                $('#clear-btn').addClass('d-none');
+            }
+            // const amount = tokens;
+            const collateral = tokens;
+            // $('#amount').val($(this).val());
+            $('#collateral').val($(this).val());
+        });
+
+        // $('#amount').on("input change", function() {
+        //     const leverage = $('#leverage').val();
+        //     const amount = $(this).val();
+        //     if (amount!=='') {
+        //         $('#clear-btn').removeClass('d-none');
+        //     } else {
+        //         $('#clear-btn').addClass('d-none');
+        //     }
+        //     const tokens = amount;
+        //     const collateral = amount;
+        //     $('#collateral').val($(this).val());
+        //     $('#tokens').val($(this).val());
+        // });
+
+        // $('.change-leverage-btn').click(function(){
+        //     var leverage = $(this).attr('data-leverage');
+        //     leverage = parseFloat(leverage).toFixed(1);
+        //     $('#leverage').val(leverage);
+        //     $('#leverage-value').html(leverage);
+        // });
+
+        // $('#leverage').on('input change', leverageChangeHandler);
+
+        $('.toggleGraph').click(function(){
+            if($(this).attr('id') == "graph-market-btn") {
+                // $('#graph-index').addClass('d-none');
+                // $('#graph-market').removeClass('d-none');
+                $('#graph-index-btn').removeClass('active');
+                indexPriceSeries.applyOptions({
+                    visible: false,
+                });
+                mktPriceSeries.applyOptions({
+                    visible: true,
+                });
+
+                toolTipIndex.addClass('d-none');
+                toolTipMarket.removeClass('d-none');
+            } else {
+                // $('#graph-market').addClass('d-none');
+                // $('#graph-index').removeClass('d-none');
+
+                mktPriceSeries.applyOptions({
+                    visible: false,
+                });
+
+                indexPriceSeries.applyOptions({
+                    visible: true,
+                });
+
+                $('#graph-market-btn').removeClass('active');
+
+                toolTipMarket.addClass('d-none');
+                toolTipIndex.removeClass('d-none');
+            }
+            $(this).addClass('active');
+        });
+    });
+</script>
+<script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js" crossorigin="anonymous"></script>
+<script>
+
+    Number.prototype.zeroPad = Number.prototype.zeroPad || 
+        function(base){
+        var nr = this, len = (String(base).length - String(nr).length)+1;
+        return len > 0? new Array(len).join('0')+nr : nr;
+        };
+
+    function createActivity(action, pos_size, col_change, exec_price, trade_fee, timestamp) {
+        let tr = $('<tr>');
+        let span;
+        switch(action){
+            case "Buy":
+                span = $('<span>', {class: "badge bg-green", text: "Buy"});
+                break;
+            case "Sell":
+                span = $('<span>', {class: "badge bg-red", text: "Sell"});
+                break;
+            case "Stake":
+                span = $('<span>', {class: "badge bg-warning", text: "Stake"});
+                break;
+            case "Withdraw":
+                span = $('<span>', {class: "badge bg-success", text: "Buy"});
+                break;
+            default:
+                span = $('<span>', {class: "badge bg-primary", text: action});
+        }
+        tr.append($('<td>').append(span));
+        tr.append($('<td>', {text: parseFloat(pos_size).toFixed(5)}));
+        tr.append($('<td>', {text: parseFloat(col_change).toFixed(5)}));
+        tr.append($('<td>', {text: parseFloat(exec_price).toFixed(3)}));
+        tr.append($('<td>', {text: parseFloat(trade_fee).toFixed(3)}));
+        tr.append($('<td>', {text: getDateTime(timestamp)}));
+        return tr;
+    }
+
+    function getDateTime(timestamp) {
+        var date = new Date(0);
+        date.setUTCSeconds(timestamp);
+        var dateStr = (date.getMonth()).zeroPad(10).toString() + '/' +
+            (date.getDate()).zeroPad(10).toString() + '/' + date.getFullYear().toString() + ' ' +
+            (date.getHours()).zeroPad(10).toString() + ':' + (date.getMinutes()).zeroPad(10).toString() + ':' + (date.getSeconds()).zeroPad(10).toString();
+        return dateStr;
+    }
+
+    function getDateTimeWithTZ(timestamp) {
+        var date = new Date(0);
+        date.setUTCSeconds(timestamp);
+        return date.toUTCString();
+    }
+
+    function addActivity(action, pos_size, col_change, exec_price, trade_fee, timestamp) {
+        const table = $('#activity-table');
+        table.prepend(createActivity('Buy',12.20001,23.2345, 1.001, 0.5, 1234000567890));
+    }
+
+    var indexPriceData = []
+    var marketPriceData = [];
+
+    var graphContainer = document.getElementById('graph');
+
+    function getRandomArbitrary(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
+    const CHART_OPTIONS = {
+        layout: {
+            background: { color: '#22222200' },
+            textColor: '#DDD',
+        },
+        rightPriceScale: {
+            scaleMargins: {
+                top: 0.30,
+                bottom: 0.1,
+            },
+            borderVisible: false,
+        },
+        timeScale: {
+            borderVisible: true,
+        },
+        grid: {
+            horzLines: {
+                color: '#fff',
+                visible: false
+            },
+            vertLines: {
+                color: '#fff',
+                visible: false
+            },
+        },
+        crosshair: {
+                horzLine: {
+                visible: false,
+                labelVisible: false
+            },
+            vertLine: {
+                visible: true,
+                style: 0,
+                width: 2,
+                color: '#2ecff620',
+                labelVisible: true,
+            }
+        },
+        timeScale: {
+            timeVisible: true,
+            secondsVisible: false,
+            minutesVisible: true,
+        }
+    };
+
+    var chart = LightweightCharts.createChart(graphContainer, CHART_OPTIONS);
+
+    var indexPriceSeries = chart.addAreaSeries({	
+        topColor: '#ac50ef66',	
+        bottomColor: '#ffffff00',
+        lineColor: '#ac50ef',
+        lineWidth: 3
+    });
+
+    var mktPriceSeries = chart.addAreaSeries({
+        topColor: '#2ecff666',
+        bottomColor: '#ffffff00',
+        lineColor: '#2ecff6',
+        lineWidth: 3
+    });
+
+    $(document).ready(async function(){
+        marketPriceData = await fetch('/static/data/marketData.json').then((data) => data.json());
+        indexPriceData = await fetch('/static/data/indexData.json').then((data) => data.json());
+        indexPriceSeries.setData(indexPriceData);
+        mktPriceSeries.setData(marketPriceData);
+
+        indexPriceSeries.applyOptions({
+            visible: false,
+        });
+
+        setLastBarMarketText(marketPriceData[marketPriceData.length - 1].value, marketPriceData[marketPriceData.length - 1].time);
+        setLastBarIndexText(indexPriceData[indexPriceData.length - 1].value, indexPriceData[indexPriceData.length - 1].time);
+    });
+
+    var toolTipIndex = $('#three-line-legend-index');
+    var toolTipMarket = $('#three-line-legend-market');
+
+    function setLastBarIndexText(price, time) {
+        toolTipIndex.html('<div style="font-size: 24px; margin: 4px 0px; color: white;"> TruCPI</div>'+ '<div style="font-size: 22px; margin: 4px 0px; color: white;">Index Price: $' + parseFloat(price).toFixed(3) + '</div>' +
+            '<div class="text-lavender">' + getDateTimeWithTZ(time) + '</div>');
+    }
+
+    function setLastBarMarketText(price, time) {
+        toolTipMarket.html('<div style="font-size: 24px; margin: 4px 0px; color: white;"> TruCPI</div>'+ '<div style="font-size: 22px; margin: 4px 0px; color: white;">Market Price: $' + parseFloat(price).toFixed(3) + '</div>' +
+            '<div class="text-blue">' + getDateTimeWithTZ(time) + '</div>');
+    }
+
+    chart.subscribeCrosshairMove(function(param) {
+        if ( param === undefined || param.time === undefined || param.point.x < 0 || param.point.x > graphContainer.offsetWidth || param.point.y < 0 || param.point.y > graphContainer.offsetHeight ) {
+            setLastBarMarketText(marketPriceData[marketPriceData.length - 1].value, marketPriceData[marketPriceData.length - 1].time);
+            setLastBarIndexText(indexPriceData[indexPriceData.length - 1].value, indexPriceData[indexPriceData.length - 1].time);
+        } else {
+            setLastBarMarketText((Math.round(param.seriesPrices.get(mktPriceSeries) * 1000) / 1000), param.time);
+            setLastBarIndexText((Math.round(param.seriesPrices.get(indexPriceSeries) * 1000) / 1000), param.time);
+        }
+    });
+
+    $('select.icon-menu').each(function(){
+          var $this = $(this), numberOfOptions = $(this).children('option').length;
+        
+          $this.addClass('select-hidden'); 
+          $this.wrap('<div class="select"></div>');
+          $this.after('<div class="select-styled"></div>');
+
+          var $styledSelect = $this.next('div.select-styled');
+          var icon = $this.children('option').eq(0).attr('data-src');
+          $styledSelect.html(`<img src="${icon}" width="20">`+' '+ $this.children('option').eq(0).text());
+        
+          var $list = $('<ul />', {
+              'class': 'select-options'
+          }).insertAfter($styledSelect);
+        
+          for (var i = 0; i < numberOfOptions; i++) {
+              var icon = $this.children('option').eq(i).attr('data-src');
+              $('<li />', {
+                  html: `<img src="${icon}" width="20"> ` + $this.children('option').eq(i).text(),
+                  rel: $this.children('option').eq(i).val(),
+                  icon: icon
+              }).appendTo($list);
+              // if ($this.children('option').eq(i).is(':selected')){
+              //  $('li[rel="' + $this.children('option').eq(i).val() + '"]').addClass('is-selected')
+              // }
+          }
+        
+          var $listItems = $list.children('li');
+        
+          $styledSelect.click(function(e) {
+              e.stopPropagation();
+              $('div.select-styled.active').not(this).each(function(){
+                  $(this).removeClass('active').next('ul.select-options').hide();
+              });
+              $(this).toggleClass('active').next('ul.select-options').toggle();
+
+          });
+        
+          $listItems.click(function(e) {
+              e.stopPropagation();
+              $styledSelect.html(`<img src="${$(this).attr('icon')}" width="20">`+ ' '+ $(this).text()).removeClass('active');
+              $this.val($(this).attr('rel'));
+              $list.hide();
+          });
+        
+          $(document).click(function() {
+              $styledSelect.removeClass('active');
+              $list.hide();
+          });
+
+      });      
+</script>
+{% endblock %}

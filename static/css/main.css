@@ -1,0 +1,328 @@
+:root {
+  --bg-color: #07091b;
+  --dark-blue: #0f122f;
+  --light-blue: #2ecff6;
+  --lavender: #ac50ef;
+  --purple: #7059fb;
+  --light-gray: #ffffff40;
+  --gray: #9c9da4;
+  --theme-green: #00c805;
+  --theme-red: #ff5a87;
+  --theme-green-light: #00c805b2;
+  --light-blue-light: #2ecff6b2;
+  --light-blue-lighter: #2ecff640;
+  --theme-red-light: #ff5a87b2;
+  --gradient-theme: linear-gradient(45deg, var(--lavender), var(--purple) 50%, var(--light-blue));
+  --moz-gradient-theme: -moz-linear-gradient(45deg, var(--lavender), var(--purple) 50%, var(--light-blue));
+  ---webkit-gradient-theme: -webkit-linear-gradient(45deg, var(--lavender), var(--purple) 50%, var(--light-blue));
+}
+
+body {
+  font-family: 'Inconsolata';
+  background-color: var(--bg-color);
+  overflow-x: hidden;
+  color: white;
+}
+
+.backgroud-dark {
+  background-color: var(--bg-color);
+}
+
+.container {
+  max-width: 960px;
+}
+
+.btn {
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  transition: 0.25s ease-in-out;
+}
+
+.btn-primary-theme {
+  background: var(--gradient-theme);
+}
+
+button:disabled,
+button[disabled] {
+  cursor: not-allowed;
+  pointer-events: all !important;
+}
+
+.btn-switch-theme {
+  color: #9c9da4;
+}
+
+.btn-switch-theme:hover,
+.btn-switch-theme:focus,
+.btn-switch-theme.active,
+.btn-outline-theme {
+  background-color: var(--dark-blue);
+  color: white;
+}
+
+.btn-primary-theme:hover,
+.btn-primary-theme:focus {
+  box-shadow: -1px 7px 22px -2px var(--purple);
+  -webkit-box-shadow: -1px 7px 22px -2px var(--purple);
+  -moz-box-shadow: -1px 7px 22px -2px var(--purple);
+  transform: translateY(-0.09em);
+}
+
+/*
+  * Custom translucent site header
+  */
+
+.site-header {
+  background-color: var(--bg-color);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  margin-left: 0%;
+  margin-right: 0%;
+}
+
+.site-header a {
+  color: white;
+  transition: color .15s ease-in-out;
+  text-decoration: none;
+}
+
+.site-header a:focus,
+.site-header a.active {
+  font-weight: bolder;
+}
+
+.dropdown-menu {
+  background-color: var(--bg-color);
+  border-color: var(--light-gray);
+}
+
+.dropdown-menu a {
+  color: var(--gray);
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu a:focus,
+.dropdown-menu a.active {
+  background-color: var(--light-blue);
+}
+
+.select-hidden {
+  display: none;
+  visibility: hidden;
+  padding-right: 10px;
+}
+
+.select {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  font-size: 1em;
+  color: white;
+  width: 100%;
+  height: 40px;
+}
+
+.select-styled {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 5px;
+  background-color: #0f122f;
+  padding: 8px 15px;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+.select-styled:after {
+  content: "";
+  width: 0;
+  height: 0;
+  border: 7px solid transparent;
+  border-color: #fff transparent transparent transparent;
+  position: absolute;
+  top: 16px;
+  right: 10px;
+}
+.select-styled:hover {
+  background-color: var(--dark-blue);
+}
+.select-styled:active, .select-styled.active {
+  background-color: var(--dark-blue);
+}
+.select-styled:active:after, .select-styled.active:after {
+  top: 9px;
+  border-color: transparent transparent #fff transparent;
+}
+
+.select-options {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  z-index: 999;
+  margin: 0;
+  border-radius: 5px;
+  padding: 0;
+  list-style: none;
+  background-color: #0f122f;
+}
+.select-options li {
+  margin: 0;
+  padding: 8px 0;
+  text-indent: 15px;
+  border-top: 1px solid var(--light-gray);
+  -moz-transition: all 0.15s ease-in;
+  -o-transition: all 0.15s ease-in;
+  -webkit-transition: all 0.15s ease-in;
+  transition: all 0.15s ease-in;
+}
+.select-options li:hover, .select-options li.is-selected {
+  background: var(--light-blue);
+  color: #fff;
+}
+.select-options li[rel="hide"] {
+  display: none;
+}
+
+.table {
+  color: white !important;
+}
+
+.table tbody tr:nth-child(2n) {
+  color: var(--light-blue-light);
+}
+
+label {
+  color: var(--gray);
+}
+
+label span {
+  font-weight: 700;
+}
+
+input[type=text],
+input[type=number] {
+  color: white !important;
+  width: 100%;
+  padding: 10px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  font-weight: 800;
+  font-size: 1.2em;
+  background-color: var(--dark-blue);
+  border: 2px solid var(--gray);
+}
+
+.section-title {
+  color: var(--light-blue);
+  font-weight: 600;
+  font-family: 'Orbitron';
+}
+
+input[type=range] {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 10px; /* Specified height */
+  border-radius: 10px;
+  background: var(--gradient-theme); /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+input[type=range]:hover,
+input[type=range]:focus {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  border-radius: 50%;
+  background: var(--dark-blue); /* Green background */
+  border: 2px solid var(--gray);
+  cursor: pointer; /* Cursor on hover */
+}
+
+input[type=range]::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  border-radius: 50%;
+  background: var(--dark-blue);
+  border: 2px solid var(--gray);
+  cursor: pointer; /* Cursor on hover */
+}
+
+.range-label {
+  color: white !important;
+  width: fit-content;
+  height: max-content;
+  padding: 6px 10px;
+  box-sizing: border-box;
+  font-weight: 300;
+  font-size: 1em;
+  background-color: var(--dark-blue);
+  border: 1px solid var(--gray);
+}
+
+.text-green {
+  color: var(--theme-green);
+}
+
+.text-red {
+  color: var(--theme-red);
+}
+
+input[type=text]:hover,
+input[type=text]:focus,
+input[type=number]:hover,
+input[type=number]:focus {
+  background-color: var(--dark-blue);
+  border-color: var(--light-blue);
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem var(--light-blue-lighter);
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.text-blue {
+  color: var(--light-blue);
+}
+
+.text-lavender {
+  color: var(--lavender);
+}
+
+/*
+  * Extra utilities
+  */
+
+.flex-equal > * {
+  flex: 1;
+}
+@media (min-width: 768px) {
+  .flex-md-equal > * {
+    flex: 1;
+  }
+}
